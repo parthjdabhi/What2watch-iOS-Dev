@@ -29,13 +29,18 @@ class CustomKolodaView: KolodaView {
             let yOffset:CGFloat = topOffset
             let frame = CGRect(x: xOffset, y: yOffset, width: width, height: height)
             
-            return frame
+            let customFrame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width , height: UIScreen.mainScreen().bounds.height-69 )
+            return customFrame
         } else if index == 1 {
             let horizontalMargin = -self.bounds.width * backgroundCardHorizontalMarginMultiplier
             let width = self.bounds.width * backgroundCardScalePercent
             let height = width * defaultHeightRatio
             
+            //let frame = CGRect(x: horizontalMargin, y: 0, width: width, height: height)
             return CGRect(x: horizontalMargin, y: 0, width: width, height: height)
+            
+            //let customFrame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width , height: UIScreen.mainScreen().bounds.height-68 )
+            //return customFrame
         }
         return CGRectZero
     }

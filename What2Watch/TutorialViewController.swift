@@ -29,7 +29,8 @@ class TutorialViewController: UIViewController {
         pageControl.addTarget(self, action: #selector(TutorialViewController.didChangePageControlValue), forControlEvents: .ValueChanged)
         pageControl.numberOfPages = 6
         self.scrollView.delegate = self
-        self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * 6, self.scrollView.frame.size.height)
+        //self.scrollView.contentSize = CGSizeMake(UIScreen.mainScreen().bounds.size.width * 6, UIScreen.mainScreen().bounds.size.height)
+        self.scrollView.contentSize = CGSizeMake(UIScreen.mainScreen().bounds.size.width * 6, 1.0)
         self.initViews()
     }
     
@@ -58,8 +59,10 @@ class TutorialViewController: UIViewController {
         
         for i in 0 ... 5 {
             let viewController = orderedViewControllers[i]
-            viewController.view.frame = CGRectMake(self.scrollView.frame.size.width * CGFloat(i), 0, self.scrollView.frame.size.width, self.scrollView.frame.size.height)
+            viewController.view.frame = CGRectMake(UIScreen.mainScreen().bounds.size.width * CGFloat(i), 0, self.scrollView.frame.size.width, self.scrollView.frame.size.height)
             (viewController as? BaseViewController)?.background.frame = UIScreen.mainScreen().bounds
+            (viewController as? BaseViewController)?.view.layoutSubviews()
+            //(viewController as? BaseViewController)?.view.layoutIfNeeded()
             self.scrollView.addSubview(viewController.view)
         }
     }
@@ -103,6 +106,11 @@ extension TutorialViewController: UIScrollViewDelegate
 {
     func scrollViewDidScroll(scrollView: UIScrollView)
     {
+//        if scrollView.contentOffset.y > 0 {
+//            scrollView.contentOffset.y = 0
+//        }
+//        self.view.endEditing(false)
+        
         let diffFromCenter = (Float(scrollView.contentOffset.x) - (Float)(self.pageControl.currentPage)*Float(self.view.frame.size.width));
         let currentPageAlpha = 1.0 - fabs(diffFromCenter)/Float(self.view.frame.size.width);
         let sidePagesAlpha = fabs(diffFromCenter)/Float(self.view.frame.size.width);

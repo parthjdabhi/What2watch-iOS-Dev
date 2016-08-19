@@ -76,9 +76,8 @@ class MovieDescriptionViewController: UIViewController, UITextFieldDelegate {
                         self.lblCast.text = "Cast:\n\(Cast)"
                     }
                 }
-                
         }
-        
+        self.view.layoutIfNeeded()
     }
     
     override func  preferredStatusBarStyle()-> UIStatusBarStyle {

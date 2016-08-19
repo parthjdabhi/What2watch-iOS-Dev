@@ -12,13 +12,23 @@ import SDWebImage
 import SWRevealViewController
 import UIActivityIndicator_for_SDWebImage
 
+import Koloda
+import pop
+
+//private let numberOfCards: UInt = 5
+private let frameAnimationSpringBounciness: CGFloat = 9
+private let frameAnimationSpringSpeed: CGFloat = 16
+private let kolodaCountOfVisibleCards = 2
+private let kolodaAlphaValueSemiTransparent: CGFloat = 0.1
+
 class MainScreenViewController: UIViewController {
  
     @IBOutlet var profileInfo: UILabel!
     @IBOutlet var profilePicture: UIImageView!
     @IBOutlet var poster: UIImageView!
     @IBOutlet var btnMenu: UIButton?
-    @IBOutlet weak var sliderImgPorgress: UISlider!
+    //@IBOutlet var draggableBackground: DraggableViewBackground!
+    @IBOutlet weak var cardHolderView: CustomKolodaView!
     
     var currentIndex:Int = 0   /// current image index
     var numberOfItems: Int = 0  /// number of images
@@ -26,11 +36,23 @@ class MainScreenViewController: UIViewController {
     var ref:FIRDatabaseReference!
     var user: FIRUser!
     
+    //var draggableBackground: DraggableViewBackground!
+    
     var movies:Array<[String:AnyObject]> = []
     var lastSwipedMovie:String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        cardHolderView.alphaValueSemiTransparent = kolodaAlphaValueSemiTransparent
+        cardHolderView.countOfVisibleCards = kolodaCountOfVisibleCards
+        cardHolderView.delegate = self
+        cardHolderView.dataSource = self
+        cardHolderView.animator = BackgroundKolodaAnimator(koloda: cardHolderView)
+        
+        
+        //draggableBackground = DraggableViewBackground(frame: CGRectMake(0, 69, UIScreen.mainScreen().bounds.width, UIScreen.mainScreen().bounds.height))
+        //self.view.addSubview(draggableBackground)
         
         //try! FIRAuth.auth()?.signOut()
         // Init menu button action for menu
@@ -73,8 +95,9 @@ class MainScreenViewController: UIViewController {
             })
         }
         
-        //let draggableBackground: DraggableViewBackground = DraggableViewBackground(frame: self.view.frame)
-        //self.view.addSubview(draggableBackground)
+        
+        //draggableBackground.cardMovies = self.movies
+        //draggableBackground.loadCards()
     }
     
     override func  preferredStatusBarStyle()-> UIStatusBarStyle {
@@ -117,8 +140,16 @@ class MainScreenViewController: UIViewController {
         if let top2000 = NSUserDefaults.standardUserDefaults().objectForKey("top2000") as? Array<[String:AnyObject]> {
             self.movies = top2000
             self.currentIndex = skipIndexToMovie(skipToMovie)
-            self.getImage(self.currentIndex)
+            //self.getImage(self.currentIndex)
             self.numberOfItems += top2000.count
+            
+            if self.currentIndex > 0 {
+                self.movies.removeFirst(self.currentIndex)
+            }
+            cardHolderView.reloadData()
+            
+//            draggableBackground.movies = self.movies
+//            draggableBackground.loadCardsFromIndex(skipIndexToMovie(skipToMovie))
         } else {
             //Load  Data first time from firebase
             CommonUtils.sharedUtils.showProgress(self.view, label: "We are loading the first poster!")
@@ -147,9 +178,18 @@ class MainScreenViewController: UIViewController {
                         NSUserDefaults.standardUserDefaults().synchronize()
                     }
                     
+                    
                     self.currentIndex = self.skipIndexToMovie(skipToMovie)
-                    self.getImage(self.currentIndex)
-                    self.numberOfItems += Int(snapshot.childrenCount)
+//                    self.getImage(self.currentIndex)
+//                    self.numberOfItems += Int(snapshot.childrenCount)
+                    
+                    if self.currentIndex > 0 {
+                        self.movies.removeFirst(self.currentIndex-1)
+                    }
+                    self.cardHolderView.reloadData()
+                    
+//                    self.draggableBackground.movies = self.movies
+//                    self.draggableBackground.loadCardsFromIndex(self.skipIndexToMovie(skipToMovie))
                 } else {
                     // Not found any movie
                 }
@@ -186,40 +226,6 @@ class MainScreenViewController: UIViewController {
     
     /*      */
     
-    func getImage(forIndex: Int)
-    {
-        if forIndex >= movies.count {
-            return
-        }
-        
-        let imdbID = movies[forIndex]["imdbID"] as? String ?? ""
-        let posterURL = "http://img.omdbapi.com/?i=\(imdbID)&apikey=57288a3b&h=1000"
-        let posterNSURL = NSURL(string: "\(posterURL)")
-
-        //print("Movie: \(imdbID) , Image: \(posterURL)")
-        
-        self.poster.sd_cancelCurrentImageLoad()
-        //self.poster.setImageWithURL(posterNSURL, placeholderImage: UIImage(named: "placeholder"), usingActivityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
-        
-        self.poster.setImageWithURL(posterNSURL, placeholderImage: UIImage(named: "placeholder"), options: SDWebImageOptions.AllowInvalidSSLCertificates, progress: { (receivedSize, expectedSize) in
-            //print("receivedSize : \(receivedSize) expectedSize : \(expectedSize) ")
-            
-            if receivedSize == 0 && expectedSize == -1 {
-               self.sliderImgPorgress.hidden = false
-            }
-            if receivedSize != 0 && receivedSize != -1 && expectedSize != -1 && expectedSize != 0 {
-                let progress = Float(receivedSize/expectedSize)
-                self.sliderImgPorgress.value = progress
-                //print("Progress : \(progress)");
-            }
-        }, completed: { (imgPoster, error, cacheType, urlPoster) in
-            if error != nil {
-                print(error)
-            }
-            self.sliderImgPorgress.hidden = true
-            self.sliderImgPorgress.value = 0
-        }, usingActivityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
-    }
     /*
     func swipeLeft() {
         SaveSwipeEntry(self.currentIndex, Status: "Liked")
@@ -277,8 +283,98 @@ class MainScreenViewController: UIViewController {
         
         var Movie =  movies[forIndex]
         Movie["status"] = Status
-        
+
         FIRDatabase.database().reference().child("swiped").child(FIRAuth.auth()?.currentUser?.uid ?? "").child(Movie["key"] as? String ?? "").setValue(Movie)
+        
+        let imdbID = Movie["imdbID"] as? String ?? ""
+        FIRDatabase.database().reference().child("users").child(AppState.MyUserID()).child("lastSwiped").child("top2000").setValue(imdbID)
+        NSUserDefaults.standardUserDefaults().setObject(imdbID, forKey: "lastSwiped_top2000")
+        NSUserDefaults.standardUserDefaults().synchronize()
     }
     
+}
+
+//MARK: KolodaViewDelegate
+extension MainScreenViewController: KolodaViewDelegate {
+    
+    func kolodaDidRunOutOfCards(koloda: KolodaView) {
+        cardHolderView.resetCurrentCardIndex()
+    }
+    
+    func koloda(koloda: KolodaView, didSelectCardAtIndex index: UInt) {
+        let movieDescriptionViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MovieDescriptionViewController") as! MovieDescriptionViewController!
+        movieDescriptionViewController.movieDetail = movies[Int(index)] as? [String:String]
+        self.navigationController?.pushViewController(movieDescriptionViewController, animated: true)
+    }
+    
+    func kolodaShouldApplyAppearAnimation(koloda: KolodaView) -> Bool {
+        return true
+    }
+    
+    func kolodaShouldMoveBackgroundCard(koloda: KolodaView) -> Bool {
+        return false
+    }
+    
+    func kolodaShouldTransparentizeNextCard(koloda: KolodaView) -> Bool {
+        return true
+    }
+    
+    func koloda(kolodaBackgroundCardAnimation koloda: KolodaView) -> POPPropertyAnimation? {
+        let animation = POPSpringAnimation(propertyNamed: kPOPViewFrame)
+        animation.springBounciness = frameAnimationSpringBounciness
+        animation.springSpeed = frameAnimationSpringSpeed
+        return animation
+    }
+    
+    func koloda(koloda: KolodaView, allowedDirectionsForIndex index: UInt) -> [SwipeResultDirection] {
+        return [.Left, .Right, .Up, .Down]
+    }
+    
+    
+    func koloda(koloda: KolodaView, didSwipeCardAtIndex index: UInt, inDirection direction: SwipeResultDirection) {
+        
+        switch direction {
+        case .Left, .TopLeft, .BottomLeft:
+            print("Liked")
+            SaveSwipeEntry(Int(index), Status: "Liked")
+            break
+        case .Right, .TopRight, .BottomRight:
+            print("Disliked")
+            SaveSwipeEntry(Int(index), Status: "Disliked")
+            break
+        case .Up:
+            print("Dislike")
+            SaveSwipeEntry(Int(index), Status: "Haven't Watched")
+            break
+        case .Down:
+            print("Watchlist")
+            SaveSwipeEntry(Int(index), Status: "Watchlist")
+            break
+        }
+    }
+}
+
+//MARK: KolodaViewDataSource
+extension MainScreenViewController: KolodaViewDataSource {
+    
+    func kolodaNumberOfCards(koloda: KolodaView) -> UInt {
+        return UInt(movies.count)
+    }
+    
+    func koloda(koloda: KolodaView, viewForCardAtIndex index: UInt) -> UIView {
+        let imgPoster = UIImageView(frame: koloda.frame)
+        let imdbID = movies[Int(index)]["imdbID"] as? String ?? ""
+        let posterURL = "http://img.omdbapi.com/?i=\(imdbID)&apikey=57288a3b&h=1000"
+        let posterNSURL = NSURL(string: "\(posterURL)")
+        
+        print(" \(index) Movie: \(imdbID) , Image: \(posterURL)")
+        imgPoster.setImageWithURL(posterNSURL, placeholderImage: UIImage(named: "placeholder"), options: SDWebImageOptions.AllowInvalidSSLCertificates, usingActivityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
+        return imgPoster
+//        return UIImageView(image: UIImage(named: "cards_\(index + 1)"))
+    }
+    
+    func koloda(koloda: KolodaView, viewForCardOverlayAtIndex index: UInt) -> OverlayView? {
+        return NSBundle.mainBundle().loadNibNamed("CustomOverlayView",
+                                                  owner: self, options: nil)[0] as? OverlayView
+    }
 }

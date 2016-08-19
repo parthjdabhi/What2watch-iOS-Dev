@@ -59,6 +59,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Koloda.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Mixpanel.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -104,6 +109,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>pop.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -122,17 +132,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>12909AB2ADAEFC67ED2FC78903D502F8</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>1520003FEBEC114D6C84F832AFEDB994</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1BAFC0FAFC0AA1AF808146DAFD9BA139</key>
+		<key>168E65A3DAD0358584EEF35382A26649</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -142,7 +147,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>2692A60CA9509B2E2A543556E170DCB4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>30D7FCF8072F5D59AE1C98D94F9A6EC9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>33CBF753A251037B954B9B88D9E2AC31</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -152,12 +167,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>55E7EE72F484259A2996B546596DBBE6</key>
+		<key>534777E8D8F405E63F0D47126BB8CB7B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5E89E656EC80E8327F92EEA9AD5EF65E</key>
+		<key>55E7EE72F484259A2996B546596DBBE6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -187,12 +202,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9FFF01119A48BF71B3CAC0813A4A067A</key>
+		<key>AF09E4BD409E7AC460262C21A1A1ECBE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AF09E4BD409E7AC460262C21A1A1ECBE</key>
+		<key>C45290004E0078130C91A71711094467</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -203,6 +218,11 @@
 			<true/>
 		</dict>
 		<key>D5C941D09578818BBD92C6320EB2435B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E08664DCE478DAFE952EC126706FFB3E</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -22,6 +22,7 @@ target 'What2Watch' do
     pod 'IQKeyboardManagerSwift'
     # Pods for What2Watch
     pod 'Alamofire', '~> 3.4'
+    pod 'Koloda', '~> 3.1'
     
     # Pods for What2Watch
     

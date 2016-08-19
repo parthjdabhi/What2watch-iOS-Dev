@@ -59,6 +59,7 @@ class TutorialViewController: UIViewController {
         for i in 0 ... 5 {
             let viewController = orderedViewControllers[i]
             viewController.view.frame = CGRectMake(self.scrollView.frame.size.width * CGFloat(i), 0, self.scrollView.frame.size.width, self.scrollView.frame.size.height)
+            (viewController as? BaseViewController)?.background.frame = UIScreen.mainScreen().bounds
             self.scrollView.addSubview(viewController.view)
         }
     }
@@ -98,27 +99,35 @@ extension TutorialViewController: TutorialPageViewControllerDelegate {
     
 }
 
-extension TutorialViewController: UIScrollViewDelegate {
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+extension TutorialViewController: UIScrollViewDelegate
+{
+    func scrollViewDidScroll(scrollView: UIScrollView)
+    {
         let diffFromCenter = (Float(scrollView.contentOffset.x) - (Float)(self.pageControl.currentPage)*Float(self.view.frame.size.width));
         let currentPageAlpha = 1.0 - fabs(diffFromCenter)/Float(self.view.frame.size.width);
         let sidePagesAlpha = fabs(diffFromCenter)/Float(self.view.frame.size.width);
         currentIndex = self.pageControl.currentPage
+
         if diffFromCenter > 0 {
             nextIndex = currentIndex! + 1
         }else {
             nextIndex = currentIndex! - 1
         }
+        
+        print("diffFromCenter \(diffFromCenter) sidePagesAlpha \(sidePagesAlpha)  currentPageAlpha \(currentPageAlpha) currrent \(currentIndex ?? 9) next \(nextIndex ?? 9) ")
+        
         (orderedViewControllers[currentIndex!] as! BaseViewController).background.backgroundColor = UIColor.init(red: 0.0, green: 0.0, blue: 0.0, alpha: CGFloat(sidePagesAlpha))
         if nextIndex > 0 && nextIndex < 6{
             (orderedViewControllers[nextIndex] as! BaseViewController).background.backgroundColor = UIColor.init(red: 0.0, green: 0.0, blue: 0.0, alpha: CGFloat(currentPageAlpha))
         }
-        
        
     }
     
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-        pageControl.currentPage = nextIndex
+        let page = (Int)((scrollView.contentOffset.x) / (self.view.frame.size.width))
+        //print("page \(page)")
+        pageControl.currentPage = page
+        (orderedViewControllers[page] as! BaseViewController).background.backgroundColor = UIColor.init(red: 0.0, green: 0.0, blue: 0.0, alpha: CGFloat(0))
     }
 }
 

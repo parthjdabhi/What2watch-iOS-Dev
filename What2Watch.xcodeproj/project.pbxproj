@@ -19,6 +19,9 @@
 		5E00828D1D56595A009DED1E /* watchlist@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E0082871D565959009DED1E /* watchlist@3x.png */; };
 		5E0082901D565FCB009DED1E /* setting1.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E00828E1D565FCA009DED1E /* setting1.png */; };
 		5E0082911D565FCB009DED1E /* user.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E00828F1D565FCB009DED1E /* user.png */; };
+		5ECD0FFE1D66D5A800EC54A8 /* DraggableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECD0FFB1D66D5A800EC54A8 /* DraggableView.swift */; };
+		5ECD0FFF1D66D5A800EC54A8 /* DraggableViewBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECD0FFC1D66D5A800EC54A8 /* DraggableViewBackground.swift */; };
+		5ECD10001D66D5A800EC54A8 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECD0FFD1D66D5A800EC54A8 /* OverlayView.swift */; };
 		5ECD1B191D62EDE900C301DF /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECD1B181D62EDE900C301DF /* MyProfileViewController.swift */; };
 		5ECD1B2E1D6301F400C301DF /* PDCarouselFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECD1B2D1D6301F400C301DF /* PDCarouselFlowLayout.swift */; };
 		5ECD1B301D63033600C301DF /* SliderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECD1B2F1D63033600C301DF /* SliderCollectionViewCell.swift */; };
@@ -168,6 +171,9 @@
 		5E0082871D565959009DED1E /* watchlist@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "watchlist@3x.png"; sourceTree = "<group>"; };
 		5E00828E1D565FCA009DED1E /* setting1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting1.png; sourceTree = "<group>"; };
 		5E00828F1D565FCB009DED1E /* user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user.png; sourceTree = "<group>"; };
+		5ECD0FFB1D66D5A800EC54A8 /* DraggableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableView.swift; sourceTree = "<group>"; };
+		5ECD0FFC1D66D5A800EC54A8 /* DraggableViewBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableViewBackground.swift; sourceTree = "<group>"; };
+		5ECD0FFD1D66D5A800EC54A8 /* OverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
 		5ECD1B181D62EDE900C301DF /* MyProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
 		5ECD1B2D1D6301F400C301DF /* PDCarouselFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDCarouselFlowLayout.swift; sourceTree = "<group>"; };
 		5ECD1B2F1D63033600C301DF /* SliderCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -347,6 +353,16 @@
 			path = "Menu Icons";
 			sourceTree = "<group>";
 		};
+		5ECD0FFA1D66D59700EC54A8 /* Movie Swiping */ = {
+			isa = PBXGroup;
+			children = (
+				5ECD0FFB1D66D5A800EC54A8 /* DraggableView.swift */,
+				5ECD0FFC1D66D5A800EC54A8 /* DraggableViewBackground.swift */,
+				5ECD0FFD1D66D5A800EC54A8 /* OverlayView.swift */,
+			);
+			name = "Movie Swiping";
+			sourceTree = "<group>";
+		};
 		5ECD1B171D62EC4F00C301DF /* New Screen */ = {
 			isa = PBXGroup;
 			children = (
@@ -414,6 +430,7 @@
 		DA21C4271D39409400E6843E /* What2Watch */ = {
 			isa = PBXGroup;
 			children = (
+				5ECD0FFA1D66D59700EC54A8 /* Movie Swiping */,
 				DA21C4281D39409400E6843E /* AppDelegate.swift */,
 				DA21C42A1D39409400E6843E /* MainScreenViewController.swift */,
 				5E0082691D55F9A6009DED1E /* MySlideMenuController.swift */,
@@ -457,9 +474,10 @@
 		DA21C4741D39460A00E6843E /* Login/Signup */ = {
 			isa = PBXGroup;
 			children = (
-				DAA481C81D4A6BF400CD962B /* TutorialViewController.swift */,
 				DA21C45C1D39458100E6843E /* FirebaseSignInViewController.swift */,
 				DAA481CE1D4A6CF900CD962B /* SignUpViewController.swift */,
+				DAA481C81D4A6BF400CD962B /* TutorialViewController.swift */,
+				97F794161D50C5A500738916 /* BaseViewController.swift */,
 				DAA481C91D4A6BF400CD962B /* TutorialPageViewController.swift */,
 				DAA481D61D4A848900CD962B /* ProfilePictureViewController.swift */,
 				DAA481DA1D4A8F5300CD962B /* EmailViewController.swift */,
@@ -467,7 +485,6 @@
 				DAA481DC1D4A94E600CD962B /* NameViewController.swift */,
 				DAA481E01D4AE5FF00CD962B /* GenderViewController.swift */,
 				DA4A56D81D4B24D000C3E402 /* TermsViewController.swift */,
-				97F794161D50C5A500738916 /* BaseViewController.swift */,
 			);
 			name = Login/Signup;
 			sourceTree = "<group>";
@@ -939,6 +956,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5ECD0FFE1D66D5A800EC54A8 /* DraggableView.swift in Sources */,
 				DA4A56D91D4B24D000C3E402 /* TermsViewController.swift in Sources */,
 				DA21C4311D39409400E6843E /* What2Watch.xcdatamodeld in Sources */,
 				DA012F891D6401E300ADBF02 /* MovieDescriptionViewController.swift in Sources */,
@@ -947,11 +965,13 @@
 				DA3D6EEE1D51284B00DAA507 /* UIViewExtensions.swift in Sources */,
 				DA21C4601D39458100E6843E /* FirebaseSignInViewController.swift in Sources */,
 				5ECD1B2E1D6301F400C301DF /* PDCarouselFlowLayout.swift in Sources */,
+				5ECD10001D66D5A800EC54A8 /* OverlayView.swift in Sources */,
 				5E00826C1D55F9A6009DED1E /* MySlideMenuController.swift in Sources */,
 				DAA481DF1D4AA34800CD962B /* DOBViewController.swift in Sources */,
 				DAA481CB1D4A6BF400CD962B /* TutorialPageViewController.swift in Sources */,
 				DAA481CD1D4A6CD000CD962B /* TextField.swift in Sources */,
 				DAA481DB1D4A8F5300CD962B /* EmailViewController.swift in Sources */,
+				5ECD0FFF1D66D5A800EC54A8 /* DraggableViewBackground.swift in Sources */,
 				5E00826D1D55F9A6009DED1E /* WatchlistViewController.swift in Sources */,
 				5ECD1B191D62EDE900C301DF /* MyProfileViewController.swift in Sources */,
 				5ECD1B341D631DFA00C301DF /* MovieListTableViewCell.swift in Sources */,

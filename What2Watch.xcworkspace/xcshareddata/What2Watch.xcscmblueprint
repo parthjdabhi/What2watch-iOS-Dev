@@ -1,23 +1,25 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "AA095B9DBA89F20CCB87D6EE301AEF4D96BC8259",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "1EA13FE91CB4B602845B47545F678E8E595999FB",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
     "C4B85D7D0D846037D00BA357778A09A4F23CDD5B" : 0,
-    "554D9454161D491A07B2D4A1FC19804C2E62D9A7" : 0,
     "7DD36ADE790772A961F16EC81BFBD95F02D5F44F" : 0,
-    "AA095B9DBA89F20CCB87D6EE301AEF4D96BC8259" : 0,
     "DC16CE93D23C65FF6471CBD74201A34945C11BE7" : 0,
+    "1EA13FE91CB4B602845B47545F678E8E595999FB" : 0,
+    "AA095B9DBA89F20CCB87D6EE301AEF4D96BC8259" : 0,
+    "554D9454161D491A07B2D4A1FC19804C2E62D9A7" : 0,
     "15DD92504035A55657A146DC9502385E58E051E5" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "8A5F449A-83ED-4963-858E-EBC6A5004FEA",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
     "C4B85D7D0D846037D00BA357778A09A4F23CDD5B" : "What2Watch---iOS-master\/",
-    "554D9454161D491A07B2D4A1FC19804C2E62D9A7" : "What2WatchDev\/",
     "7DD36ADE790772A961F16EC81BFBD95F02D5F44F" : "What2Watch-App-iPad-iPhone-Screen-Separate-Storyboards-2\/",
-    "AA095B9DBA89F20CCB87D6EE301AEF4D96BC8259" : "What2Watch-master-%2017%20Aug%20Morning\/",
     "DC16CE93D23C65FF6471CBD74201A34945C11BE7" : "What2Watch\/",
+    "1EA13FE91CB4B602845B47545F678E8E595999FB" : "What2watch-iOS-Dev\/",
+    "AA095B9DBA89F20CCB87D6EE301AEF4D96BC8259" : "What2Watch-master-%2017%20Aug%20Morning\/",
+    "554D9454161D491A07B2D4A1FC19804C2E62D9A7" : "What2WatchDev\/",
     "15DD92504035A55657A146DC9502385E58E051E5" : "..\/Downloads\/Snagged-App-RoyDevos-2"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "What2Watch",
@@ -28,6 +30,11 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Harloch\/Snagged-for-iOS-Swift-.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "15DD92504035A55657A146DC9502385E58E051E5"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/parthjdabhi\/What2watch-iOS-Dev.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "1EA13FE91CB4B602845B47545F678E8E595999FB"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/parthjdabhi\/What2WatchDev",

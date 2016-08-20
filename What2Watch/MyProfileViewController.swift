@@ -15,8 +15,9 @@ class MyProfileViewController: UIViewController, UICollectionViewDelegate, UICol
     @IBOutlet var imgProfile: UIImageView!
     @IBOutlet var lblDisplayName: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
+
+    var imgs = ["ic_madel","ic_watchlist","ic_watch-video","ic_madel","ic_watchlist"]
     private var currentPage: Int = 1
-    
     private var movieWatched:Array<[String:AnyObject]> = []
     
     private var pageSize: CGSize {
@@ -102,19 +103,34 @@ class MyProfileViewController: UIViewController, UICollectionViewDelegate, UICol
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(SliderCollectionViewCell.identifier, forIndexPath: indexPath) as! SliderCollectionViewCell
         
-        cell.image.image = UIImage(named: "")
+        
         cell.image.layer.cornerRadius = max(cell.image.frame.size.width, cell.image.frame.size.height) / 2
-        cell.image.layer.borderWidth = 10
+        //cell.image.layer.borderWidth = 10
         cell.image.layer.borderColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.1).CGColor
-        cell.lblValue.text = "\(self.movieWatched.count)"
+        
         
         cell.selectedBackgroundView = nil
+        
+        switch indexPath.row {
+        case 0:
+            cell.image.image = UIImage(named: imgs[indexPath.row])
+            cell.lblValue.text = "-"
+            cell.lblTitle.text = "Title"
+        case 1:
+            cell.image.image = UIImage(named: imgs[indexPath.row])
+            cell.lblValue.text = "\(self.movieWatched.count)"
+            cell.lblTitle.text = "Watched Movies:"
+        default:
+            cell.image.image = UIImage(named: imgs[indexPath.row])
+            cell.lblValue.text = "-"
+            cell.lblTitle.text = "Title"
+        }
         
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        //let character = items[indexPath.row]
+//        let character = items[indexPath.row]
 //        if currentPage != indexPath.row {
 //            //let indexPath = NSIndexPath(forItem: currentPage, inSection: 0)
 //            self.collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .CenteredHorizontally, animated: true)

@@ -40,6 +40,8 @@ class MySlideMenuController : UIViewController {
     @IBOutlet weak var btnMainScreen: UIButton!
     @IBOutlet weak var btnLogout: UIButton!
     
+    var ref = FIRDatabase.database().reference()
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -103,12 +105,38 @@ class MySlideMenuController : UIViewController {
 //        self.watchlistVC = UINavigationController(rootViewController: watchlistVC)
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        RefreshWatchllistCount()
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.LightContent;
+    }
+    
+    func RefreshWatchllistCount() {
+        ref.child("swiped").child(AppState.MyUserID())
+            .queryOrderedByChild("status")
+            .queryEqualToValue("Watchlist")
+            .observeSingleEventOfType(.Value, withBlock: { snapshot in
+                if snapshot.exists() && snapshot.childrenCount > 0 {
+                    print(snapshot.childrenCount)
+                    self.lblCount?.text = "\(snapshot.childrenCount)"
+                    self.lblCount?.hidden = false
+                } else {
+                    // Not found any movie
+                    self.lblCount?.hidden = true
+                }
+                
+                }, withCancelBlock: { error in
+                    print(error.description)
+                    MBProgressHUD.hideHUDForView(self.view, animated: true)
+                    self.lblCount?.hidden = true
+            })
     }
     
     @IBAction func actionMainScreen(sender: AnyObject) {

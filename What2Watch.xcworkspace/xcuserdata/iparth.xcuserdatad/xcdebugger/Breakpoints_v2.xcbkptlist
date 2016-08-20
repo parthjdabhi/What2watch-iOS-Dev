@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "What2Watch/MyProfileViewController.swift"
-            timestampString = "493036817.855664"
+            timestampString = "493398633.264837"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
             landmarkName = "MyProfileViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "What2Watch/MyProfileViewController.swift"
-            timestampString = "493036817.855664"
+            timestampString = "493398633.264837"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
             landmarkName = "numberOfSectionsInCollectionView(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "What2Watch/MyProfileViewController.swift"
-            timestampString = "493036817.855664"
+            timestampString = "493398633.264837"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
             landmarkName = "collectionView(_:numberOfItemsInSection:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "What2Watch/MyProfileViewController.swift"
-            timestampString = "493036817.855664"
+            timestampString = "493398895.976154"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
             landmarkName = "MyProfileViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "What2Watch/MyProfileViewController.swift"
-            timestampString = "493036667.77132"
+            timestampString = "493398633.264837"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
             landmarkName = "viewDidLoad()"
             landmarkType = "5">
          </BreakpointContent>
@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "What2Watch/MyProfileViewController.swift"
-            timestampString = "493036667.77132"
+            timestampString = "493398633.264837"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
             landmarkName = "viewDidLoad()"
             landmarkType = "5">
          </BreakpointContent>
@@ -512,8 +512,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "391"
             endingLineNumber = "391"
-            landmarkName = "kolodaNumberOfCards(_:)"
-            landmarkType = "5">
+            landmarkName = "MainScreenViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -528,8 +528,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "407"
             endingLineNumber = "407"
-            landmarkName = "koloda(_:viewForCardOverlayAtIndex:)"
-            landmarkType = "5">
+            landmarkName = "MainScreenViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -544,8 +544,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "401"
             endingLineNumber = "401"
-            landmarkName = "koloda(_:viewForCardAtIndex:)"
-            landmarkType = "5">
+            landmarkName = "MainScreenViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

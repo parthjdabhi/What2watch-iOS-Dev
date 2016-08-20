@@ -18,7 +18,7 @@ import OAuthSwift
 import IQKeyboardManagerSwift
 import Alamofire
 
-@UIApplicationMain
+//@UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
     
     var window: UIWindow?
@@ -260,5 +260,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         // ...
     }
     
+}
+
+
+class UIApplicationTimer: UIApplication {
+    
+    static let ApplicationDidTimoutNotification = "AppTimout"
+    
+    // The timeout in seconds for when to fire the idle timer.
+    let timeoutInSeconds: NSTimeInterval = 10 //* 60
+    
+    var idleTimer: NSTimer?
+    
+    // Listen for any touch. If the screen receives a touch, the timer is reset.
+    override func sendEvent(event: UIEvent) {
+        super.sendEvent(event)
+        
+        if idleTimer != nil {
+            self.resetIdleTimer()
+        }
+        
+        if let touches = event.allTouches() {
+            for touch in touches {
+                if touch.phase == UITouchPhase.Began {
+                    self.resetIdleTimer()
+                }
+            }
+        }
+    }
+    
+    // Resent the timer because there was user interaction.
+    func resetIdleTimer() {
+        if let idleTimer = idleTimer {
+            idleTimer.invalidate()
+        }
+        
+        idleTimer = NSTimer.scheduledTimerWithTimeInterval(timeoutInSeconds, target: self, selector: #selector(UIApplicationTimer.idleTimerExceeded), userInfo: nil, repeats: false)
+    }
+    
+    // If the timer reaches the limit as defined in timeoutInSeconds, post this notification.
+    func idleTimerExceeded() {
+        NSNotificationCenter.defaultCenter().postNotificationName(UIApplicationTimer.ApplicationDidTimoutNotification, object: nil)
+    }
 }
 

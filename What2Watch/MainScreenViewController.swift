@@ -27,6 +27,7 @@ class MainScreenViewController: UIViewController {
     @IBOutlet var profilePicture: UIImageView!
     @IBOutlet var poster: UIImageView!
     @IBOutlet var btnMenu: UIButton?
+    @IBOutlet var imgInstruction: UIImageView!
     //@IBOutlet var draggableBackground: DraggableViewBackground!
     @IBOutlet weak var cardHolderView: CustomKolodaView!
     
@@ -51,10 +52,16 @@ class MainScreenViewController: UIViewController {
         cardHolderView.animator = BackgroundKolodaAnimator(koloda: cardHolderView)
         cardHolderView.backgroundColor = UIColor.blackColor()
         
-        //draggableBackground = DraggableViewBackground(frame: CGRectMake(0, 69, UIScreen.mainScreen().bounds.width, UIScreen.mainScreen().bounds.height))
-        //self.view.addSubview(draggableBackground)
+        imgInstruction.alpha = 0
         
-        //try! FIRAuth.auth()?.signOut()
+        let imgTapGesture = UILongPressGestureRecognizer(target: self, action: #selector(MainScreenViewController.onTapInstructionOverlay(_:)) )
+        imgTapGesture.numberOfTouchesRequired = 1
+        imgTapGesture.cancelsTouchesInView = true
+        imgTapGesture.minimumPressDuration = 0
+        imgInstruction.addGestureRecognizer(imgTapGesture)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MainScreenViewController.applicationDidTimout(_:)), name: UIApplicationTimer.ApplicationDidTimoutNotification, object: nil)
+        
         // Init menu button action for menu
         if let revealVC = self.revealViewController() {
             self.btnMenu?.addTarget(revealVC, action: #selector(revealVC.revealToggle(_:)), forControlEvents: .TouchUpInside)
@@ -95,6 +102,9 @@ class MainScreenViewController: UIViewController {
             })
         }
         
+        if NSUserDefaults.standardUserDefaults().objectForKey("isInstructionShown") == nil {
+            showInstruction(1)
+        }
         
         //draggableBackground.cardMovies = self.movies
         //draggableBackground.loadCards()
@@ -136,6 +146,19 @@ class MainScreenViewController: UIViewController {
     /**
      Custom functions
      */
+    
+    func onTapInstructionOverlay(sender: UILongPressGestureRecognizer? = nil) {
+        //imgInstruction.hidden = true
+        showInstruction(0)
+        NSUserDefaults.standardUserDefaults().setObject("true", forKey: "isInstructionShown")
+    }
+    
+    func showInstruction(value:Int) {
+        let opacityAnimation:POPSpringAnimation = POPSpringAnimation(propertyNamed: kPOPViewAlpha)
+        opacityAnimation.toValue = value
+        imgInstruction.pop_addAnimation(opacityAnimation, forKey: "opacityAnimation")
+    }
+    
     func getMoviewRecord(skipToMovie:String?) {
         if let top2000 = NSUserDefaults.standardUserDefaults().objectForKey("top2000") as? Array<[String:AnyObject]> {
             self.movies = top2000
@@ -214,67 +237,6 @@ class MainScreenViewController: UIViewController {
         return 0
     }
     
-//    respondToSwipe
-//    if self.currentIndex <= movies.count {
-//        //var Movie =  movies[self.currentIndex]
-//        let imdbID = movies[self.currentIndex]["imdbID"] as? String ?? ""
-//        FIRDatabase.database().reference().child("users").child(AppState.MyUserID()).child("lastSwiped").child("top2000").setValue(imdbID)
-//        NSUserDefaults.standardUserDefaults().setObject(imdbID, forKey: "lastSwiped_top2000")
-//        NSUserDefaults.standardUserDefaults().synchronize()
-//    }
-    
-    
-    /*      */
-    
-    /*
-    func swipeLeft() {
-        SaveSwipeEntry(self.currentIndex, Status: "Liked")
-        if self.currentIndex < self.numberOfItems-1 {
-            self.currentIndex = self.currentIndex + 1
-            self.getImage(self.currentIndex)
-        }
-        else if self.currentIndex == self.numberOfItems-1 {
-            // We have to Load Next set of records
-            self.LoadMoreMovieRecords(false)
-        }
-    }
-    
-    func swipeRight() {
-        SaveSwipeEntry(self.currentIndex, Status: "Disliked")
-        if self.currentIndex < self.numberOfItems-1 {
-            self.currentIndex = self.currentIndex + 1
-            self.getImage(self.currentIndex)
-        }
-//        if self.currentIndex > 0 {
-//            self.currentIndex = self.currentIndex - 1
-//            self.getImage(self.currentIndex)
-//        }
-    }
-    
-    func swipeUp() {
-        SaveSwipeEntry(self.currentIndex, Status: "Haven't Watched")
-        if self.currentIndex < self.numberOfItems-1 {
-            self.currentIndex = self.currentIndex + 1
-            self.getImage(self.currentIndex)
-        }    }
-    
-    func swipeDown() {
-        SaveSwipeEntry(self.currentIndex, Status: "Watchlist")
-        if self.currentIndex < self.numberOfItems-1 {
-            self.currentIndex = self.currentIndex + 1
-            self.getImage(self.currentIndex)
-        }
-    }
-    
-    func tappedMe()
-    {
-        
-        let movieDescriptionViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MovieDescriptionViewController") as! MovieDescriptionViewController!
-        movieDescriptionViewController.movieDetail = movies[currentIndex] as? [String:String]
-        self.navigationController?.pushViewController(movieDescriptionViewController, animated: true)
-        
-    }*/
-    
     func SaveSwipeEntry(forIndex: Int,Status: String)
     {
         if forIndex >= movies.count {
@@ -292,6 +254,10 @@ class MainScreenViewController: UIViewController {
         NSUserDefaults.standardUserDefaults().synchronize()
     }
     
+    // The callback for when the timeout was fired.
+    func applicationDidTimout(notification: NSNotification) {
+        showInstruction(1)
+    }
 }
 
 //MARK: KolodaViewDelegate

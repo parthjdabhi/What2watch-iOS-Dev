@@ -503,6 +503,9 @@
                                 <rect key="frame" x="0.0" y="68" width="375" height="599"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg_Instruction" translatesAutoresizingMaskIntoConstraints="NO" id="EXL-GV-0VW">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -533,6 +536,7 @@
                     <connections>
                         <outlet property="btnMenu" destination="eyC-QN-dkK" id="aT3-Ta-Ecd"/>
                         <outlet property="cardHolderView" destination="XcY-Vz-kOv" id="OaC-km-rk3"/>
+                        <outlet property="imgInstruction" destination="EXL-GV-0VW" id="IvX-iv-jwY"/>
                         <outlet property="poster" destination="5Y7-L0-aaD" id="CjA-S8-XyY"/>
                         <outlet property="profileInfo" destination="phA-K5-w4p" id="a5M-cx-kCA"/>
                     </connections>
@@ -3019,6 +3023,7 @@
         <image name="back button.png" width="21" height="36"/>
         <image name="background2.png" width="750" height="1334"/>
         <image name="backgroundlayer.png" width="750" height="1334"/>
+        <image name="bg_Instruction" width="249" height="443"/>
         <image name="box.png" width="38" height="39"/>
         <image name="help.png" width="132" height="132"/>
         <image name="icon_arrow_forward.png" width="33" height="29"/>

@@ -62,6 +62,7 @@ class MovieDescriptionViewController: UIViewController, UITextFieldDelegate {
                     
                     if let Year = JSON["Year"] {
                         self.lblYear.text = "\(Year)"
+                        self.lblYear.addTextSpacing(8)
                     }
                     if let Plot = JSON["Plot"] {
                         self.lblPlot.text = "About:\n\(Plot)"
@@ -70,7 +71,7 @@ class MovieDescriptionViewController: UIViewController, UITextFieldDelegate {
                         self.lblDirector.text = "Directed by \(Director)"
                     }
                     if let Likes = JSON["imdbVotes"] {
-                        self.lblLikes.text = "\(Likes) Likes"
+                        self.lblLikes.text = "\(Likes)"
                     }
                     if let Cast = JSON["Actors"] {
                         self.lblCast.text = "Cast:\n\(Cast)"
@@ -91,4 +92,13 @@ class MovieDescriptionViewController: UIViewController, UITextFieldDelegate {
     @IBAction func actionSearch(sender: AnyObject) {
     }
     
+}
+
+
+extension UILabel{
+    func addTextSpacing(spacing: CGFloat){
+        let attributedString = NSMutableAttributedString(string: self.text!)
+        attributedString.addAttribute(NSKernAttributeName, value: spacing, range: NSRange(location: 0, length: self.text!.characters.count))
+        self.attributedText = attributedString
+    }
 }

@@ -248,6 +248,11 @@ public class KolodaView: UIView, DraggableCardDelegate {
             self.moveOtherCardsWithPercentage(percentage)
         }
         delegate?.koloda(self, draggedCardWithPercentage: percentage, inDirection: direction)
+        
+        if visibleCards.count > 1 {
+            let nextCard = visibleCards[1]
+            nextCard.alpha = shouldTransparentizeNextCard ? (percentage/100) : alphaValueOpaque
+        }
     }
     
     func card(card: DraggableCardView, shouldSwipeInDirection direction: SwipeResultDirection) -> Bool {

@@ -19,7 +19,7 @@ import pop
 private let frameAnimationSpringBounciness: CGFloat = 9
 private let frameAnimationSpringSpeed: CGFloat = 16
 private let kolodaCountOfVisibleCards = 2
-private let kolodaAlphaValueSemiTransparent: CGFloat = 0.1
+private let kolodaAlphaValueSemiTransparent: CGFloat = 0.05
 
 class MainScreenViewController: UIViewController {
  
@@ -49,7 +49,7 @@ class MainScreenViewController: UIViewController {
         cardHolderView.delegate = self
         cardHolderView.dataSource = self
         cardHolderView.animator = BackgroundKolodaAnimator(koloda: cardHolderView)
-        
+        cardHolderView.backgroundColor = UIColor.blackColor()
         
         //draggableBackground = DraggableViewBackground(frame: CGRectMake(0, 69, UIScreen.mainScreen().bounds.width, UIScreen.mainScreen().bounds.height))
         //self.view.addSubview(draggableBackground)
@@ -306,6 +306,8 @@ extension MainScreenViewController: KolodaViewDelegate {
         movieDescriptionViewController.movieDetail = movies[Int(index)] as? [String:String]
         self.navigationController?.pushViewController(movieDescriptionViewController, animated: true)
     }
+    
+
     
     func kolodaShouldApplyAppearAnimation(koloda: KolodaView) -> Bool {
         return true

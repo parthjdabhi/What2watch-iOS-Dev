@@ -36,6 +36,8 @@ class CustomKolodaView: KolodaView {
             let width = self.bounds.width * backgroundCardScalePercent
             let height = width * defaultHeightRatio
             
+//            self.alpha
+            
             //let frame = CGRect(x: horizontalMargin, y: 0, width: width, height: height)
             return CGRect(x: horizontalMargin, y: 0, width: width, height: height)
             
